@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TMB9 PC RAISING</title>
+  <title>Money Goal Tracker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,6 +29,29 @@
       text-align: center;
       transition: width 0.5s;
     }
+    .log {
+      margin-top: 30px;
+      text-align: left;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .log h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+    .log ul {
+      list-style: none;
+      padding: 0;
+    }
+    .log li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
   </style>
 </head>
 <body>
@@ -38,23 +61,37 @@
     <div id="progress" class="progress-bar">0%</div>
   </div>
 
+  <div class="log">
+    <h2>Daily Earnings Log</h2>
+    <ul id="logList"></ul>
+  </div>
+
   <script>
-    // Example JSON (replace with fetch if you have an external file)
+    // Your JSON log
     const earningsData = [
       { "date": "September 4th 2025", "earned": 10.25 },
       { "date": "September 26th 2025", "earned": 9.45 }
     ];
 
-    const goal = 800; // set your goal here
+    const goal = 800; // your goal
     const current = earningsData.reduce((sum, day) => sum + day.earned, 0);
 
+    // Update stats
+    document.getElementById("stats").innerText = `${current.toFixed(2)} $ / ${goal} $`;
+
+    // Progress bar
     const percent = Math.min((current / goal) * 100, 100);
-
-    document.getElementById("stats").innerText = `${current} $ / ${goal} $`;
-
     const progressBar = document.getElementById("progress");
     progressBar.style.width = percent + "%";
     progressBar.innerText = Math.floor(percent) + "%";
+
+    // Daily log
+    const logList = document.getElementById("logList");
+    earningsData.forEach(entry => {
+      const li = document.createElement("li");
+      li.textContent = `${entry.date}: $${entry.earned.toFixed(2)}`;
+      logList.appendChild(li);
+    });
   </script>
 </body>
 </html>
