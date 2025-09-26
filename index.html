@@ -33,7 +33,7 @@
 </head>
 <body>
   <h1>Money Goal Tracker</h1>
-  <div id="stats"></div>
+  <h1 id="stats"></h1>
   <div class="progress-container">
     <div id="progress" class="progress-bar">0%</div>
   </div>
@@ -45,7 +45,7 @@
       { "date": "September 26th 2025", "earned": 9.45 }
     ];
 
-    const goal = 200; // set your goal here
+    const goal = 800; // set your goal here
     const current = earningsData.reduce((sum, day) => sum + day.earned, 0);
 
     const percent = Math.min((current / goal) * 100, 100);
